@@ -13,7 +13,8 @@ class Google extends Component {
   }
   responseGoogle = response => {
     if (response.profileObj !== undefined) {
-      const tokenId = response.tokenId;
+      console.log('RESPONSE GOOGLE OBJECT: ', response);
+      const { tokenId } = response;
       const { googleId, name, email } = response.profileObj;
       const user = {
         password: googleId,
