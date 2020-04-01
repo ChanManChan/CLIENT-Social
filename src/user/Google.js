@@ -48,6 +48,7 @@ class Google extends Component {
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
               className='btn btn-raised btn-danger btn-lg'
+              style={{ width: '100%' }}
             >
               <i class='fab fa-google pr-2'></i> Login with Google
             </button>

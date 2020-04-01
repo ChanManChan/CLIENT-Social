@@ -9,7 +9,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "react": "^16.13.1",
-    "react -toastify": "^5.5.0",
+    "react-toastify": "^5.5.0",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.1.2",

@@ -50,15 +50,11 @@ class Signin extends Component {
 
   signinForm = (email, password) => (
     <Fragment>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          marginBottom: '2rem'
-        }}
-      >
+      <div>
+        <hr />
         <Google />
         <Facebook />
+        <hr />
       </div>
       <form>
         <div className='form-group'>
@@ -85,6 +81,12 @@ class Signin extends Component {
         >
           Submit
         </button>
+        <p className='ml-3' style={{ display: 'inline' }}>
+          <Link to='/forgot-password' className='text-danger'>
+            {' '}
+            Forgot Password
+          </Link>
+        </p>
       </form>
     </Fragment>
   );
@@ -92,7 +94,7 @@ class Signin extends Component {
     const { email, password, redirectToReferer, loading } = this.state;
     if (redirectToReferer) return <Redirect to='/' />;
     return (
-      <div className='container'>
+      <div className='col-md-5' style={{ margin: '0 auto' }}>
         <h2 className='mt-5 mb-5'>SignIn</h2>
         {/* <div
           className='alert alert-danger'
@@ -105,15 +107,7 @@ class Signin extends Component {
             <h2>Loading...</h2>
           </div>
         ) : (
-          <Fragment>
-            {this.signinForm(email, password)}
-            <p>
-              <Link to='/forgot-password' className='text-danger'>
-                {' '}
-                Forgot Password
-              </Link>
-            </p>
-          </Fragment>
+          <Fragment>{this.signinForm(email, password)}</Fragment>
         )}
       </div>
     );

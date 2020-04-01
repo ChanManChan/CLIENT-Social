@@ -75,7 +75,7 @@ class Signup extends Component {
   render() {
     const { name, email, password, error, open } = this.state;
     return (
-      <div className='container'>
+      <div className='col-md-5' style={{ margin: '0 auto' }}>
         <h2 className='mt-5 mb-5'>Signup</h2>
         <div
           className='alert alert-danger'

@@ -51,6 +51,7 @@ class Facebook extends Component {
             <button
               onClick={renderProps.onClick}
               className='btn btn-raised btn-info btn-lg'
+              style={{ width: '100%' }}
             >
               <i class='fab fa-facebook pr-2'></i> Login with Facebook
             </button>
