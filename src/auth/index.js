@@ -46,7 +46,6 @@ export const signout = next => {
     method: 'GET'
   })
     .then(response => {
-      console.log('Signout', response);
       return response.json();
     })
     .catch(err => console.log(err));

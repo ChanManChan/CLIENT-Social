@@ -13,11 +13,13 @@ class Google extends Component {
   }
   responseGoogle = response => {
     if (response.profileObj !== undefined) {
+      const tokenId = response.tokenId;
       const { googleId, name, email } = response.profileObj;
       const user = {
         password: googleId,
         name,
-        email
+        email,
+        tokenId
       };
       socialLogin(user).then(data => {
         if (data.error) {

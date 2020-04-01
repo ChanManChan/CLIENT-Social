@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { isAuthenticated, signout } from '../auth';
 import { remove } from './apiUser';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class DeleteUser extends Component {
   state = {
@@ -15,6 +16,9 @@ class DeleteUser extends Component {
       else {
         // signout user
         signout(() => console.log('User is deleted'));
+        toast.success('Account deleted', {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
         // redirect
         this.setState({ redirect: true });
       }
