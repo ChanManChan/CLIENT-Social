@@ -15,15 +15,21 @@ const validateForm = (errors, userData) => {
     val => val.length > 0 && (valid = false)
   );
   const { name, email, password, fileSize, about } = userData;
-  if (
-    name.length < 5 ||
-    !validEmailRegex.test(email) ||
-    password.length < 6 ||
-    fileSize > 100000 ||
-    about.length > 100
-  ) {
-    valid = false;
-  }
+  about === undefined
+    ? (valid = !(
+        name.length < 5 ||
+        !validEmailRegex.test(email) ||
+        password.length < 6 ||
+        fileSize > 100000
+      ))
+    : (valid = !(
+        name.length < 5 ||
+        !validEmailRegex.test(email) ||
+        password.length < 6 ||
+        fileSize > 100000 ||
+        about.length > 100
+      ));
+
   return valid;
 };
 class EditProfile extends Component {
@@ -93,7 +99,12 @@ class EditProfile extends Component {
       const token = isAuthenticated().token;
       update(userId, token, this.userData).then(data => {
         if (data.error) this.setState({ error: data.error, loading: false });
-        else {
+        else if (isAuthenticated().user.role === 'admin') {
+          this.setState({ redirectToProfile: true });
+          toast.success('Profile updated as admin', {
+            position: toast.POSITION.BOTTOM_LEFT
+          });
+        } else {
           toast.success('Profile updated!', {
             position: toast.POSITION.BOTTOM_LEFT
           });
@@ -159,7 +170,9 @@ class EditProfile extends Component {
   editForm = (name, email, password, errors, about) => (
     <form>
       <div className='form-group'>
-        <label className='text-muted'>Profile Photo</label>
+        <label className='text-info'>
+          <strong>Profile Photo</strong>
+        </label>
         <input
           onChange={this.handleImage}
           type='file'
@@ -172,7 +185,9 @@ class EditProfile extends Component {
         )}
       </div>
       <div className='form-group'>
-        <label className='text-muted'>Name</label>
+        <label className='text-info'>
+          <strong>Name</strong>
+        </label>
         <input
           onChange={this.handleChange}
           type='text'
@@ -186,7 +201,9 @@ class EditProfile extends Component {
         )}
       </div>
       <div className='form-group'>
-        <label className='text-muted'>Email</label>
+        <label className='text-info'>
+          <strong>Email</strong>
+        </label>
         <input
           onChange={this.handleChange}
           type='email'
@@ -200,13 +217,16 @@ class EditProfile extends Component {
         )}
       </div>
       <div className='form-group'>
-        <label className='text-muted'>About</label>
+        <label className='text-info'>
+          <strong>About</strong>
+        </label>
         <textarea
           onChange={this.handleChange}
           type='text'
           className='form-control'
           name='about'
           value={about}
+          placeholder='Optional...'
           noValidate
         />
         {errors.about.length > 0 && (
@@ -214,7 +234,9 @@ class EditProfile extends Component {
         )}
       </div>
       <div className='form-group'>
-        <label className='text-muted'>Password</label>
+        <label className='text-info'>
+          <strong>Password</strong>
+        </label>
         <input
           onChange={this.handleChange}
           type='password'

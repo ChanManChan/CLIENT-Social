@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { list } from './apiUser';
 import DefaultProfile from '../images/avatar.jpg';
 import { Link } from 'react-router-dom';
+
 class Users extends Component {
   constructor() {
     super();
@@ -49,11 +50,27 @@ class Users extends Component {
                 alt={user.name}
               />
               <div className='card-body'>
-                <h5 className='card-title'>{user.name}</h5>
-                <p className='card-text'>{user.email}</p>
+                {user.role === 'admin' ? (
+                  <h5 className='card-title text-danger'>{user.name}</h5>
+                ) : (
+                  <h5 className='card-title'>{user.name}</h5>
+                )}
+                <strong>Email: </strong>
+                <p className='card-text' style={{ display: 'inline' }}>
+                  {user.email}
+                </p>
+                <br />
+                <strong>Role: </strong>
+                <p
+                  className='card-text text-info'
+                  style={{ display: 'inline' }}
+                >
+                  {user.role}
+                </p>
+                <br />
                 <Link
                   to={`/user/${user._id}`}
-                  className='btn btn-raised btn-primary btn-sm'
+                  className='btn btn-raised btn-primary btn-sm mt-2'
                 >
                   View Profile
                 </Link>

@@ -76,6 +76,17 @@ const Menu = ({ history }) => {
             </Fragment>
           ) : (
             <Fragment>
+              {isAuthenticated().user.role === 'admin' && (
+                <li className='nav-item'>
+                  <Link
+                    to={`/admin`}
+                    style={isActive(history, `/admin`)}
+                    className='nav-link'
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )}
               <li className='nav-item'>
                 <Link
                   className='nav-link'
